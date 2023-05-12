@@ -1,0 +1,5 @@
+python-dateutil
+psycopg2
+pep8
+django==2.2.9
+gunicorn

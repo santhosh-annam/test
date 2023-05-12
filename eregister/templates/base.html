@@ -1,0 +1,90 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="expires" content="0" />
+<meta http-equiv="pragma" content="no-cache" /> 
+
+<meta http-equiv="Content-Security-Policy" 
+content="default-src 'self';
+script-src 'self' 'unsafe-inline';
+style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+font-src 'self' https://fonts.googleapis.com https://gstsatic.com https://fonts.gstatic.com;
+style-src-elem 'self' https://fonts.googleapis.com;
+base-uri 'self';
+object-src 'none';">
+
+<meta name="referrer" content="no-referrer" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<link rel="icon" type="image/ico" href="{% static 'images/favicon.ico' %}">
+<link
+        href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+        rel="stylesheet" />
+<link rel="stylesheet" href="{% static 'css/style.css' %}" />
+
+<title>KFHB E-Registration</title>
+</head>
+  <body style="background-image:url('{%static 'images/body-bg.gif'%}');">
+    <div class="login"> 
+
+        <div class="login--phone top-header">
+          <div>
+            <h2>Having difficulties?</h2>
+            <div class="phone-icon">
+              <img src="{% static 'images/phone.png' %}" alt="" /><span>77777777</span>
+            </div>
+          </div>
+          <div>
+            <p class="header-animation"></p>
+          </div>
+          <div>
+		    <img src="{% static 'images/logo2x.png' %}" class="log" alt="" />
+          </div>
+        </div>
+
+        <div class="d-flex stretch login--form">
+            <div class="w-50 d-flex align-items-stretch d-flex-column">
+			  <img src="{% static 'images/lock.jpg' %}" class="log" class="img-responsive" alt="" />
+              <!-- <div class="login_text"> -->
+                  <!-- <h5 class="quote"></h5> -->
+                  <!-- <p></p> -->
+              <!-- </div> -->
+            </div>
+            <div class="w-50">
+              <div class="register--form__body h-100">
+                <p class="green_btn_type">Enter Your Details</p>
+                 
+				 {% block content %} {% endblock content%}
+				 
+              </div>
+            </div>
+        </div>
+
+        <div class="footerLogin">
+          <div class="clearfix">
+            <span class="footer-text-left"> <span>©</span> <span class="copyright-block">Kuwait Finance House (Bahrain) B.S.C.(c). Licensed as an Islamic Retail Bank by the Central Bank of Bahrain</span>
+            </span> <span class="footer-text-right">
+              <div class="privacy-block">
+                <ul class="footer-nav">
+                  <li class="no-image"><a href="/retail/javax.faces.resource/pdf/tc_en.pdf.xhtml?ln=primefaces-seam" target="_blank">Terms and Conditions</a></li>
+                  <li><a href="/retail/javax.faces.resource/pdf/Privacy_Policy.pdf.xhtml?ln=primefaces-seam" target="_blank">Privacy Policy </a></li>
+                  <li><a href="/retail/javax.faces.resource/pdf/Notice.pdf.xhtml?ln=primefaces-seam" target="_blank">Notice </a></li>
+                </ul>
+              </div>
+            </span>
+          </div>
+        </div>
+
+      
+    </div>
+
+   <script src="{% static 'js/jquery.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/jquery.maskedinput.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/jquery.validate.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/registration.js' %}"></script>
+</body>
+</html>

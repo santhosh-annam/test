@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<form id= "redirect_callbackurl_form" method = "POST">
+   {% csrf_token %}
+   {% if auth_status_code and callback_url and session_id and auth_status_description and rim_no %}
+   <input type = "hidden" name = "auth_status_description" value = "{{auth_status_description}}" id="auth_status_description"/>
+   <input type = "hidden" name = "auth_status_code" value = "{{auth_status_code}}" id="auth_status_code"/>
+   <input type = "hidden" name = "callback_url" value = "{{callback_url}}" id="callback_url"/>
+   <input type = "hidden" name = "session_id" value = "{{session_id}}" id="session_id"/>
+   <input type = "hidden" name = "rim_no" value = "{{rim_no}}" id="rim_no"/>
+   {% endif %}
+</form>
+<form name="form" method="POST" id="card" >
+   <div id = "id_csrf">{% csrf_token %}</div>
+    <div>
+   {% if auth_status_code and callback_url and session_id and auth_status_description %}
+   <!-- EMPTY BLOCK... -->
+   {% elif messages %}
+   {% for message in messages %}
+   <div class="reg-success">{{ message }}</div>
+   {% endfor %}
+   {% else %}
+   {% if form.non_field_errors %}
+   <div class="no-error" >
+      {% for error in form.non_field_errors %}
+      <li>{{ error }}</li>
+      {% endfor %}
+   </div>
+   {% endif %}
+   {% endif %}
+   
+   
+   <div class="from-group req">
+      <span class="md-inputfield">
+	  <input type = "hidden" name = "channel" {% if channel != None %}value="{{ channel}}"{% endif %} id="id_channel"/>
+       
+      <input class="ui-inputfield ui-inputtext ui-widget ui-state-default ui-corner-all form-control" name="cpr"  
+	  id="id_cpr"  
+	  onkeypress="return isNumber(event);"
+      type="text" 
+	  autocomplete="off"
+      {% if form.cpr.value != None %}value="{{ form.cpr.value}}"{% endif %}
+       required maxlength="18"
+      />
+      <p class="ui-outputlabel ui-widget from-group">CPR</p>
+      </span>
+	  <div  class="error">{% if form.cpr.errors%}{{ form.cpr.errors}}{% endif %}</div>
+   </div>
+   <div class="form-2">
+      <div class="from-group req">
+         <span class="md-inputfield">
+		 <input
+         name="card_number" id="id_card_number" maxlength="19" onkeypress="return isNumber(event);"
+         class="ui-inputfield ui-inputtext ui-widget ui-state-default ui-corner-all form-control"
+         {% if form.card_number.value != None %}value="{{ form.card_number.value}}"{% endif %}
+         type="text" autocomplete="off" (change)="ngModel = sanitize($event.target.value)" 
+         />
+         <p class="ui-outputlabel ui-widget from-group"> Card Number </p>
+         </span>
+		 <div class="error">{% if form.card_number.errors%}{{ form.card_number.errors}}{% endif %}</div>
+      </div>
+      <div class="from-group req">
+         <span class="md-inputfield">
+		 <input id="id_expiry" name="expiry"
+		  autocomplete="off"
+		 class="ui-inputfield ui-inputtext ui-widget ui-state-default ui-corner-all form-control"
+         type="text" {% if form.expiry.value != None %}value="{{ form.expiry.value}}"{% endif %}
+         />
+         <p class="ui-outputlabel ui-widget from-group">Expiry</p>
+         </span>
+		 <div class="error">{% if form.expiry.errors%}{{ form.expiry.errors}}{% endif %}</div>
+      </div>
+   </div>
+   <div class="form-3">
+      <div class="from-group req">
+         <label for="" class="lable_p">Date of birth</label>
+         <div class="form-dob d-flex">
+            <div>
+               <select name="dob_day" id="id_dob_day">
+                  <option value="">Day</option>
+               </select>
+            </div>
+            <div>
+               <select name="dob_month" id="id_dob_month">
+                  <option value="">Month</option>
+               </select>
+            </div>
+            <div>
+               <select name="dob_year" id="id_dob_year">
+                  <option value="">Year</option>
+               </select>
+            </div>
+         </div>
+         <div class="error">{% if form.dob.errors%}{{ form.dob.errors}}{% endif %}</div>
+      </div>
+   </div>
+   <input id="btnFrmSubmit" class="btn" type="submit" value= "SUBMIT"/>
+</form>
+{% endblock content%}
